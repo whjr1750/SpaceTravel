@@ -61,7 +61,10 @@ function setup(){
     //fill("pink");
     //f2 = createSprite(650,70,0,40)
     //f2.shapeColor="pink"
-    
+    playButton  = createButton("play")
+        playButton.position(500,500)
+        playButton.size(50,50)
+        playButton.mousePressed(play)
 }
     
 function draw(){
@@ -69,7 +72,7 @@ function draw(){
     if (gameState === "start"){
 
         background(startbgImg)
-
+        drawSprites() //added this
         textSize(50)
         stroke("Black")
         fill("white")
@@ -81,24 +84,21 @@ function draw(){
         text("to collect the star fuels ", 500,300)
 
         rocket.velocityY = -9
-
+        // rocket.debug=true
         if (rocket.y<0){
             rocket.y = 630
         }
 
-        button = createButton("play")
-        button.position(500,500)
-        button.size(50,50)
-        button.mousePressed(play)
+        
         //bg.addImage(startbgImg)
     }
 
     else if(gameState === "play"){
-
+        rocket.visible=false
         bg.addImage(bgImg)
         bg.scale = 1.2
 
-        button.hide()
+        playButton.hide()
         background(200)
 
         if (keyDown(RIGHT_ARROW)){
@@ -294,9 +294,3 @@ function moreObstacles(){
     }
 }
 
-function rocket(){
-    rocket = createSprite(100,300,50,50)
-    rocket.addImage(rImg)
-    rocket.scale = 0.4
-    rocket.velocityY = -9
-}
